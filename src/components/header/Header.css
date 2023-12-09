@@ -1,80 +1,104 @@
-div.header-home{
-    width: 100%;
-    height: 5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: solid 1px black;
+div.header-home {
+  width: 100%;
+  height: 5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: solid 1px black;
 }
 
-div.header-home ul.list-icon-social{
-    width: 20rem;
-    height: 100%;
-    list-style-type: none;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
-    padding: 0 2rem;
+div.header-home ul.list-icon-social {
+  width: 20rem;
+  height: 100%;
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 0 2rem;
 }
-div.header-home div.search-bar{
-    height: 100%;
-    display: flex;
-    justify-self: center;
-    align-items: center;
-}
-
-
-div.header-home div.search-bar input{
-    width: 40rem;
-    min-width: 10rem;
-    height: 50%;
-    display: flex;
-    border-radius: 0.5rem;
-    text-align: center;
+div.header-home div.search-bar {
+  height: 100%;
+  display: flex;
+  justify-self: center;
+  align-items: center;
 }
 
-div.header-home div.search-bar input::placeholder{
-    color: black;
-    text-align: center;
-    font-weight: 600;
-    font-size: 1.2rem;
+div.header-home div.search-bar input {
+  width: 40rem;
+  min-width: 10rem;
+  height: 50%;
+  display: flex;
+  border-radius: 0.5rem;
+  text-align: center;
 }
 
-
-div.header-home div.hi{
-    width: 25rem;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
+div.header-home div.search-bar input::placeholder {
+  color: black;
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.2rem;
 }
 
-div.header-home div.hi i{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.5rem;
-    font-size: 1.5rem;
+div.header-home div.hi {
+  width: 25rem;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
 }
 
-div.header-home div.hi div.perfil-menu{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    border-left: solid 1px black;
-    padding-left: 3rem;
+div.header-home div.hi i {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-size: 1.5rem;
 }
 
-div.header-home div.hi div.perfil-menu img{
-    height: 3.5rem;
+div.header-home div.hi div.perfil-menu-container {
+  height: 100%;
+  position: relative;
 }
 
-div.header-home div.hi div.perfil-menu span{
-    font-size: 1.2rem;
-    font-weight: 600;
+div.header-home div.hi div.perfil-menu-container div.perfil-menu {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border-left: solid 1px black;
+  padding: 0 3rem;
+}
+
+div.header-home div.hi div.perfil-menu-container div.perfil-menu img {
+  height: 3.5rem;
+}
+
+div.header-home div.hi div.perfil-menu-container div.perfil-menu span {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+div.header-home div.hi div.perfil-menu-container div.menu-options ul {
+  width: 100%;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background-color: #fff;
+  /* border: 1px solid #ccc; */
+  border: 1px solid black;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+div.header-home div.hi div.perfil-menu-container div.menu-options li {
+  padding: 10px;
+  cursor: pointer;
+  font-size: 1.2rem;
 }
 
 @media (max-width: 768px) {

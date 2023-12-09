@@ -7,6 +7,7 @@ import IAPNG from "../../assets/png/machinelearning.png";
 import JsPNG from "../../assets/png/js.png";
 import untels1PNG from "../../assets/jpg/fondo.jpg";
 import untels2PNG from "../../assets/jpg/untels2.jpg";
+import untelslogoPNG from "../../assets/png/untels_logo.png";
 
 const Home = () => {
   const images = [
@@ -26,6 +27,7 @@ const Home = () => {
       <div className="content">
         <div className="presentation">
           <h1>¡Bienvenidos a nuestro blog!</h1>
+          <img src={untelslogoPNG} alt="" />
           <p>
             Creado por estudiantes de la UNTELS y dedicado especialmente a
             explorar temas de tecnología. Extendemos una cordial invitación a
@@ -51,7 +53,7 @@ const Home = () => {
           ))}
         </div>
 
-        <div className="image-grid">
+        {/* <div className="image-grid">
           {images.map((image, index) => (
             <div
               key={index}
@@ -63,7 +65,7 @@ const Home = () => {
               }}
             />
           ))}
-        </div>
+        </div> */}
       </div>
     </div>
   );

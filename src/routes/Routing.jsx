@@ -11,16 +11,18 @@ import { GlobalContext } from "../context/GlobalStateContext.jsx";
 
 const Routing = () => {
   const { user, setUser } = useContext(GlobalContext);
+  const tokenLocal = localStorage.getItem("token");
 
   useEffect(() => {
     const checkToken = async () => {
       try {
-        const tokenLocal = localStorage.getItem("token");
         if (tokenLocal) {
           // Si hay token, intentar obtener el detalle del usuario
           axios.defaults.headers.common["authorization"] = tokenLocal;
           const detailUserResponse = await axios.get("/user/detail");
           const userDetail = detailUserResponse.data;
+          localStorage.setItem("user", JSON.stringify(userDetail));
+          localStorage.setItem("tokenIsValid", "true");
           setUser(userDetail);
         }
       } catch (error) {
@@ -30,19 +32,18 @@ const Routing = () => {
     };
 
     checkToken();
-  }, [setUser]);
-  
+  }, [setUser, tokenLocal]);
 
   return (
-      <BrowserRouter basename="/UNTELSConnect/">
-        <Routes>
-          <Route index path="/" element={<Login />} />
-          <Route element={<BlogLayout />}>
-            <Route path="/home" element={<Home />} />
-          </Route>
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
+    <BrowserRouter basename="/UNTELSConnect/">
+      <Routes>
+        <Route index path="/" element={<Login />} />
+        <Route element={<BlogLayout />}>
+          <Route path="/home" element={<Home />} />
+          <Route path="/*" element={<NotFound />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 };
 

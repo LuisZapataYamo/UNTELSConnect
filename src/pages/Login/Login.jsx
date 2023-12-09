@@ -15,14 +15,15 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
   const { user, setUser } = useContext(GlobalContext);
   const navigate = useNavigate();
-
+  const userDetail  = localStorage.getItem("user");
+  
   useEffect(() => {
-    if (user) {
+    if (userDetail) {
       navigate("/home");
     } else {
       navigate("/");
     }
-  }, [user, setUser]);
+  }, [userDetail]);
 
   // Logica para registro
   const [
