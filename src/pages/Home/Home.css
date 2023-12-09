@@ -1,0 +1,70 @@
+div.index-home{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+div.index-home div.content{
+    flex: 0 1 100rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 2rem;
+}
+
+div.index-home div.content div.presentation{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+div.index-home div.content div.presentation h1{
+    font-size: 7rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+div.index-home div.content div.presentation p{
+    padding: 4rem;
+    font-size: 1.6rem;
+}
+
+div.index-home div.content div.image-grid{
+    height: 80rem;
+    width: 100%;
+    display: grid;
+    grid-auto-flow: column;
+}
+
+div.index-home div.content div.image-grid div.grid-item{
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size:contain;
+}
+
+div.index-home div.content div.image-grid2{
+    height: 50rem;
+    width: 100%;
+    display: grid;
+    grid-auto-flow: column;
+    margin-bottom: 5rem;
+}
+
+div.index-home div.content div.image-grid2 div.grid-item{
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size:cover;
+}
+
+@media (max-width: 768px) {
+  div.index-home div.content div.presentation h1 {
+    font-size: 6rem;
+  }
+}
+
+@media (max-width: 490px) {
+  div.index-home div.content div.presentation h1 {
+    font-size: 5rem;
+  }
+}
