@@ -18,10 +18,14 @@ const Header = () => {
     setMenuVisible(!isMenuVisible);
   };
 
+  const handleCreatedPost = () => {
+    navigate("/newPost");
+  }
+
   const handleSignOut = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("tokenIsValid");
-    localStorage.removeItem("user");
+    // localStorage.removeItem("user");
     setUser(null);
     navigate("/");
   };
@@ -51,7 +55,7 @@ const Header = () => {
         <input type="text" placeholder="UNTELSConnect" />
       </div>
       <div className="hi">
-        <i>
+        <i onClick={handleCreatedPost}>
           <PlusIcon />
           Post
         </i>

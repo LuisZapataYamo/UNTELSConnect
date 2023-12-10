@@ -15,15 +15,15 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
   const { user, setUser } = useContext(GlobalContext);
   const navigate = useNavigate();
-  const userDetail  = localStorage.getItem("user");
+  const tokenIsValid  = localStorage.getItem("tokenIsValid");
   
   useEffect(() => {
-    if (userDetail) {
+    if (tokenIsValid === "true") {
       navigate("/home");
     } else {
       navigate("/");
     }
-  }, [userDetail]);
+  }, [tokenIsValid]);
 
   // Logica para registro
   const [

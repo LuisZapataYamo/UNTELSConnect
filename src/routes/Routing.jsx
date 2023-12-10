@@ -8,6 +8,7 @@ import Home from "../pages/Home/Home.jsx";
 import NotFound from "../pages/NotFound/NotFound.jsx";
 import { useContext, useEffect } from "react";
 import { GlobalContext } from "../context/GlobalStateContext.jsx";
+import CreatedPost from "../pages/CreatePost/CreatedPost.jsx";
 
 const Routing = () => {
   const { user, setUser } = useContext(GlobalContext);
@@ -21,13 +22,14 @@ const Routing = () => {
           axios.defaults.headers.common["authorization"] = tokenLocal;
           const detailUserResponse = await axios.get("/user/detail");
           const userDetail = detailUserResponse.data;
-          localStorage.setItem("user", JSON.stringify(userDetail));
+          // localStorage.setItem("user", JSON.stringify(userDetail));
           localStorage.setItem("tokenIsValid", "true");
           setUser(userDetail);
         }
       } catch (error) {
         // En caso de error, manejar de manera adecuada (redirección, mensaje de error, etc.)
         console.error("Error al verificar el token:", error);
+        localStorage.setItem("tokenIsValid", "false");
       }
     };
 
@@ -40,6 +42,7 @@ const Routing = () => {
         <Route index path="/" element={<Login />} />
         <Route element={<BlogLayout />}>
           <Route path="/home" element={<Home />} />
+          <Route path="/newPost" element={<CreatedPost />} />
           <Route path="/*" element={<NotFound />} />
         </Route>
       </Routes>

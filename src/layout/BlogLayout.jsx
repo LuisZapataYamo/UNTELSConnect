@@ -12,7 +12,7 @@ const BlogLayout = () => {
   const tokeIsValid = localStorage.getItem("tokenIsValid");
 
   useEffect(() => {
-    if (!tokeIsValid) {
+    if (tokeIsValid === "false") {
       navigate("/");
     }
   }, [tokeIsValid]);

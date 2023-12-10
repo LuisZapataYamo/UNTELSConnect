@@ -41,7 +41,7 @@ div.header-home div.search-bar input::placeholder {
 }
 
 div.header-home div.hi {
-  width: 25rem;
+  width: 20rem;
   height: 100%;
   display: flex;
   justify-content: space-between;
@@ -50,11 +50,17 @@ div.header-home div.hi {
 }
 
 div.header-home div.hi i {
+  height: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: 0.5rem;
   font-size: 1.5rem;
+}
+
+div.header-home div.hi i:hover , div.header-home div.hi i:hover svg{
+  text-shadow: black;
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
 }
 
 div.header-home div.hi div.perfil-menu-container {
@@ -69,7 +75,7 @@ div.header-home div.hi div.perfil-menu-container div.perfil-menu {
   justify-content: space-between;
   gap: 1rem;
   border-left: solid 1px black;
-  padding: 0 3rem;
+  padding: 0 1rem;
 }
 
 div.header-home div.hi div.perfil-menu-container div.perfil-menu img {
