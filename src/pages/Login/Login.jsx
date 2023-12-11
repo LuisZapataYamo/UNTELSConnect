@@ -30,6 +30,7 @@ const Login = () => {
     isEqualPasswordAndPasswordConfirmation,
     setIsEqualPasswordAndPasswordConfirmation,
   ] = useState(false);
+  
   const [formDataRegister, setFormDataRegister] = useState({
     userType: "externo",
     email: "",

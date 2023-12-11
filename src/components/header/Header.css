@@ -5,6 +5,7 @@ div.header-home {
   justify-content: space-between;
   align-items: center;
   border-bottom: solid 1px black;
+  background-color: white;
 }
 
 div.header-home ul.list-icon-social {
@@ -66,6 +67,7 @@ div.header-home div.hi i:hover , div.header-home div.hi i:hover svg{
 div.header-home div.hi div.perfil-menu-container {
   height: 100%;
   position: relative;
+  cursor: pointer;
 }
 
 div.header-home div.hi div.perfil-menu-container div.perfil-menu {

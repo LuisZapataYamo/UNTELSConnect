@@ -17,28 +17,98 @@ div.index-newpost div.content-post{
 
 div.index-newpost div.content-post h1{
     text-align: center;
-    font-size: 4rem;
+    font-size: 5rem;
+    font-weight: 800;
 }
 
 
 div.index-newpost div.content-post form{
+    flex: 1 1 70rem;;
     width: 100%;
-    height: 70rem;
     display: flex;
     flex-direction: column;
-    /* border: solid 1px black; */
-    padding: 1rem;
-    background-color: #ccc;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 3rem 5rem;
+    background-color: white;
+    box-shadow: 0 0 0 1px #1717170d;
+    border-radius: 1rem;
 }
 
 div.index-newpost div.content-post form div.title{
     width: 100%;
-    height: 10rem;
+    height: auto;
 }
 
-div.index-newpost div.content-post form div.title input{
+div.index-newpost div.content-post form div.title textarea{
     width: 100%;
-    height: 100%;
+    height: 6rem;
     font-size: 4rem;
     border: none;
+    color: black;
+    font-weight: 800;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+div.index-newpost div.content-post form div.title textarea::placeholder{
+    color: #525252;
+}
+
+div.index-newpost div.content-post form div.title textarea:focus-visible{
+    outline: none;
+}
+
+div.index-newpost div.content-post form div.tags{
+    width: 100%;
+}
+
+div.index-newpost div.content-post form div.content-tags{
+    width: 100%;
+    height: 3rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap:1rem;
+}
+
+div.index-newpost div.content-post form div.content-tags div.tag{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;    
+}
+
+div.index-newpost div.content-post form div.content-tags div.tag input{
+    width: 5rem;
+    outline: none;
+    border: none;
+    width: auto;
+    font-size: 1.5rem;
+    text-align: left;
+}
+
+div.index-newpost div.content-post form div.text-post{
+    flex: 1 1 0;
+    width: 100%;
+}
+
+div.index-newpost div.content-post form div.text-post textarea{
+    width: 100%;
+    height: 100%;
+    font-size: 2rem;
+    border: none;
+    color: black;
+    font-weight: 600;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+div.index-newpost div.content-post form div.text-post textarea::placeholder{
+    color: #525252;
+}
+
+div.index-newpost div.content-post form div.text-post textarea:focus-visible{
+    outline: none;
 }

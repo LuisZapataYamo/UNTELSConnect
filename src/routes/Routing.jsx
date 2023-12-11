@@ -22,7 +22,6 @@ const Routing = () => {
           axios.defaults.headers.common["authorization"] = tokenLocal;
           const detailUserResponse = await axios.get("/user/detail");
           const userDetail = detailUserResponse.data;
-          // localStorage.setItem("user", JSON.stringify(userDetail));
           localStorage.setItem("tokenIsValid", "true");
           setUser(userDetail);
         }
