@@ -30,21 +30,33 @@ const SentenceInput = (props) => {
 };
 
 const CreatedPost = () => {
-  const {setTitlePage, setNewPostID } = useContext(GlobalContext);
+  const {setUser, setTitlePage, setNewPostID } = useContext(GlobalContext);
   const [tags, setTags] = useState([]);
   const [text, setTextError] = useState(null);
-  const tokenIsValid = localStorage.getItem("tokenIsValid");
-  const navigate = useNavigate()
-
-  
+  const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(tokenIsValid);
-    if (tokenIsValid == "false") {
-      navigate("/");
-    }
     setTitlePage("Crear Post");
-  }, [setTextError, tokenIsValid]);
+    const tokenLocal = localStorage.getItem("token");
+    const fetchData = async () => {
+      try {
+        if (tokenLocal) {
+          axios.defaults.headers.common["authorization"] = tokenLocal;
+          const response = await axios.get("/user/detail");
+          const userDetail = response.data;
+          setUser(userDetail);
+        } else {
+          navigate("/");
+        }
+      } catch (error) {
+        localStorage.removeItem("token");
+        console.log(error);
+        navigate("/");
+      }
+    };
+
+    fetchData();
+  }, [setNewPostID]);
 
   const [formPost, setFormPost] = useState({
     title: "",
@@ -91,8 +103,8 @@ const CreatedPost = () => {
       })
       .catch((error) => {
         console.log("Error al publicar el Post", error);
-        if(error.response.status == 401){
-          localStorage.setItem("tokenIsValid", false)
+        if (error.response.status == 401) {
+          localStorage.setItem("tokenIsValid", false);
           navigate("/");
         }
       });

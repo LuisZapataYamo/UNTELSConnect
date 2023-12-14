@@ -10,35 +10,10 @@ import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../context/GlobalStateContext.jsx";
 import CreatedPost from "../pages/CreatePost/CreatedPost.jsx";
 import Post from "../pages/Post/Post.jsx";
+import DiscoverPost from "../pages/DiscoverPost/DiscoverPost.jsx";
 
 const Routing = () => {
   const { user, setUser } = useContext(GlobalContext);
-
-  useEffect((e) => {
-    const tokenLocal = localStorage.getItem("token");
-    const checkToken = async() => {
-      console.log("Routing ejecutandose")
-      if (tokenLocal) {
-        // Si hay token, intentar obtener el detalle del usuario
-        axios.defaults.headers.common["authorization"] = tokenLocal;
-        await axios
-          .get("/user/detail")
-          .then((response) => {
-            const userDetail = response.data;
-            localStorage.setItem("tokenIsValid", "true");
-            setUser(userDetail);
-          })
-          .catch((error) => {
-            console.log("Error al verificar el token:", error.response.error);
-            localStorage.setItem("tokenIsValid", "false");
-            localStorage.removeItem("token")
-          });
-      }
-    };
-
-    checkToken();
-
-  }, [setUser]);
 
   return (
     <BrowserRouter basename="/UNTELSConnect/">
@@ -46,6 +21,8 @@ const Routing = () => {
         <Route index path="/" element={<Login />} />
         <Route element={<BlogLayout />}>
           <Route path="/home" element={<Home />} />
+          <Route path="/discover/" element={<DiscoverPost />} />
+          <Route path="/discover/:q" element={<DiscoverPost />} />
           <Route path="/newPost" element={<CreatedPost />} />
           <Route path="/post/:postID" element={<Post />} />
           <Route path="/*" element={<NotFound />} />

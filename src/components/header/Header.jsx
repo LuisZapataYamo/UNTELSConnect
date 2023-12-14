@@ -14,6 +14,7 @@ const Header = () => {
   const { user, setUser, titlePage, setTitlePage } = useContext(GlobalContext);
   const [isMenuVisible, setMenuVisible] = useState(false);
   const [isNewPost, setIsNewPost] = useState(false);
+  const [contentSearch, setContentSearch] = useState("");
   const navigate = useNavigate();
   
   useEffect(() => {
@@ -30,7 +31,7 @@ const Header = () => {
   };
 
   const handleClickLogo = () => {
-    navigate("/home");
+    navigate("/discover");
   }
 
   const handleCreatedPost = () => {
@@ -51,6 +52,14 @@ const Header = () => {
     console.log("Go to Settings");
   };
 
+
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      navigate(`/discover/${contentSearch}`);
+      console.log("Se presionó Enter");
+    }
+  };
+
   return (
     <div className="header-home">
       <ul className="list-icon-social">
@@ -62,7 +71,12 @@ const Header = () => {
       </ul>
       {!isNewPost && (
         <div className="search-bar">
-          <input type="text" placeholder="UNTELSConnect" />
+          <input
+            type="text"
+            placeholder="UNTELSConnect"
+            onKeyUp={handleKeyPress}
+            onChange={(e) => setContentSearch(e.target.value)}
+          />
         </div>
       )}
 

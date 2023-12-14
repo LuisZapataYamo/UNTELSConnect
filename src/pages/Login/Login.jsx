@@ -16,16 +16,28 @@ const Login = () => {
   const { user, setUser } = useContext(GlobalContext);
   const [textError, setTextError] = useState();
   const navigate = useNavigate();
-  const tokenIsValid = localStorage.getItem("tokenIsValid");
+  let tokenIsValid = false;
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (tokenIsValid == "true" && token) {
-      navigate("/home");
-    }
-    // else{
-    //   localStorage.removeItem("token");
-    // }
+    const tokenLocal = localStorage.getItem("token");
+    const fetchData = async () => {
+      try {
+        if (tokenLocal) {
+          axios.defaults.headers.common["authorization"] = tokenLocal;
+          const response = await axios.get("/user/detail");
+          const userDetail = response.data;
+          setUser(userDetail);
+          navigate("/home");
+          console.log("user exit");
+        }
+      } catch (error) {
+        localStorage.removeItem("token");
+        console.log(error);
+        navigate("/");
+      }
+    };
+
+    fetchData();
   }, [textError, tokenIsValid]);
 
   // Logica para registro
@@ -105,10 +117,9 @@ const Login = () => {
           });
       })
       .catch((error) => {
-        console.log("Error ",error.response);
+        console.log("Error ", error.response);
       });
 
-  
     // }catch(error){
     //   try{
     //     const responseError = error.response.data
@@ -119,7 +130,7 @@ const Login = () => {
     // }
   };
 
-  return tokenIsValid == "false" ? (
+  return !tokenIsValid ? (
     <div className="index-login">
       <div className="description">
         <h1>UNTELS Connect</h1>
