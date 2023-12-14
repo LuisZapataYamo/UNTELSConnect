@@ -1,7 +1,12 @@
 import "./CreatedPost.css";
+
+import axios from "axios";
+
 import PlusIcon from "../../assets/svg/plus.svg?react";
 import DeletedIcon from "../../assets/svg/deleted.svg?react";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
+import { GlobalContext } from "../../context/GlobalStateContext";
+import { useNavigate } from "react-router-dom";
 
 const SentenceInput = (props) => {
   const { value, onChange, placeholder } = props;
@@ -25,8 +30,21 @@ const SentenceInput = (props) => {
 };
 
 const CreatedPost = () => {
+  const {setTitlePage, setNewPostID } = useContext(GlobalContext);
   const [tags, setTags] = useState([]);
-  const [title, setTitle] = useState("");
+  const [text, setTextError] = useState(null);
+  const tokenIsValid = localStorage.getItem("tokenIsValid");
+  const navigate = useNavigate()
+
+  
+
+  useEffect(() => {
+    console.log(tokenIsValid);
+    if (tokenIsValid == "false") {
+      navigate("/");
+    }
+    setTitlePage("Crear Post");
+  }, [setTextError, tokenIsValid]);
 
   const [formPost, setFormPost] = useState({
     title: "",
@@ -64,10 +82,24 @@ const CreatedPost = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    axios
+      .post("/post/", formPost)
+      .then((response) => {
+        setNewPostID(response.data.postID);
+        console.log(response.data.postID);
+        navigate(`/post/${response.data.postID}`);
+      })
+      .catch((error) => {
+        console.log("Error al publicar el Post", error);
+        if(error.response.status == 401){
+          localStorage.setItem("tokenIsValid", false)
+          navigate("/");
+        }
+      });
   };
 
   const handleTitleChange = (e) => {
-    const {name, value} = e.target
+    const { name, value } = e.target;
     const { current } = textareaRef;
     if (current) {
       current.style.height = "6rem";
@@ -78,9 +110,9 @@ const CreatedPost = () => {
       [name]: value,
     });
   };
-  
+
   const handleContentPostChange = (e) => {
-    const {name, value} = e.target
+    const { name, value } = e.target;
     const { current } = contentPostRef;
     if (current) {
       current.style.height = "100%";
@@ -95,7 +127,7 @@ const CreatedPost = () => {
   return (
     <div className="index-newpost">
       <div className="content-post">
-        <h1>Crear nuevo Post</h1>
+        {/* <h1>Crear nuevo Post</h1> */}
         <form onSubmit={handleSubmit}>
           <div className="title">
             <textarea
@@ -133,6 +165,9 @@ const CreatedPost = () => {
               onChange={handleContentPostChange}
             />
           </div>
+          <button className="button-public" type="submit">
+            Publicar
+          </button>
         </form>
       </div>
     </div>

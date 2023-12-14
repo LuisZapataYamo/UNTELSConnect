@@ -1,0 +1,92 @@
+div.index-post{
+    flex: 1 1 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+div.index-post div.container-post{
+    flex: 0 1 100rem;
+    padding: 1rem;
+    /* background-color: var(--blue-black);
+    color: var(--white-soft); */
+    font-family: "Segoe UI Semibold", ui-serif;
+    font-size: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+div.index-post div.container-post div.post-info{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+div.index-post div.container-post div.post-info div.info-text{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+div.index-post div.container-post div.post-info div.info-text span.username{
+    font-size: 1.6rem;
+    font-weight: 600;
+}
+
+div.index-post div.container-post div.post-info div.info-text span.date{
+    font-size: 1.2rem;
+}
+
+div.index-post div.container-post > h1 {
+    font-size: 5rem;
+}
+
+div.index-post div.container-post > h2 {
+    font-size: 3.5rem;
+    font-weight: normal;
+}
+
+div.index-post div.container-post a {
+    color: #004084;
+}
+
+div.index-post div.container-post > p > em {
+    display: inline-block;
+    padding: 2rem;
+    border: 1px solid black;
+    margin: 2rem;
+}
+
+div.index-post div.container-post > blockquote {
+    padding-left: 2rem;
+    border-left: 1px solid black;
+    margin: 1rem 0;
+    font-size: 1.5rem;
+}
+
+div.index-post div.container-post p  code.code-inline {
+    border-radius: 5px;
+    padding: 2px 5px;
+    color: #004084;
+}
+
+div.index-post div.container-post pre{
+    margin: 1rem;
+    ,im-width: 100%;
+}
+
+/* 
+div.index-post div.container-post pre code {
+    display: inline-block;
+    flex: 0 1 100rem;
+} */
+
+
+div.index-post div.container-post ul{
+    padding-left: 2rem;
+}

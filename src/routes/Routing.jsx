@@ -6,34 +6,39 @@ import BlogLayout from "../layout/BlogLayout.jsx";
 
 import Home from "../pages/Home/Home.jsx";
 import NotFound from "../pages/NotFound/NotFound.jsx";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../context/GlobalStateContext.jsx";
 import CreatedPost from "../pages/CreatePost/CreatedPost.jsx";
+import Post from "../pages/Post/Post.jsx";
 
 const Routing = () => {
   const { user, setUser } = useContext(GlobalContext);
-  const tokenLocal = localStorage.getItem("token");
 
-  useEffect(() => {
-    const checkToken = async () => {
-      try {
-        if (tokenLocal) {
-          // Si hay token, intentar obtener el detalle del usuario
-          axios.defaults.headers.common["authorization"] = tokenLocal;
-          const detailUserResponse = await axios.get("/user/detail");
-          const userDetail = detailUserResponse.data;
-          localStorage.setItem("tokenIsValid", "true");
-          setUser(userDetail);
-        }
-      } catch (error) {
-        // En caso de error, manejar de manera adecuada (redirección, mensaje de error, etc.)
-        console.error("Error al verificar el token:", error);
-        localStorage.setItem("tokenIsValid", "false");
+  useEffect((e) => {
+    const tokenLocal = localStorage.getItem("token");
+    const checkToken = async() => {
+      console.log("Routing ejecutandose")
+      if (tokenLocal) {
+        // Si hay token, intentar obtener el detalle del usuario
+        axios.defaults.headers.common["authorization"] = tokenLocal;
+        await axios
+          .get("/user/detail")
+          .then((response) => {
+            const userDetail = response.data;
+            localStorage.setItem("tokenIsValid", "true");
+            setUser(userDetail);
+          })
+          .catch((error) => {
+            console.log("Error al verificar el token:", error.response.error);
+            localStorage.setItem("tokenIsValid", "false");
+            localStorage.removeItem("token")
+          });
       }
     };
 
     checkToken();
-  }, [setUser, tokenLocal]);
+
+  }, [setUser]);
 
   return (
     <BrowserRouter basename="/UNTELSConnect/">
@@ -42,6 +47,7 @@ const Routing = () => {
         <Route element={<BlogLayout />}>
           <Route path="/home" element={<Home />} />
           <Route path="/newPost" element={<CreatedPost />} />
+          <Route path="/post/:postID" element={<Post />} />
           <Route path="/*" element={<NotFound />} />
         </Route>
       </Routes>

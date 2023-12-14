@@ -14,23 +14,26 @@ import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const { user, setUser } = useContext(GlobalContext);
+  const [textError, setTextError] = useState();
   const navigate = useNavigate();
-  const tokenIsValid  = localStorage.getItem("tokenIsValid");
-  
+  const tokenIsValid = localStorage.getItem("tokenIsValid");
+
   useEffect(() => {
-    if (tokenIsValid === "true") {
+    const token = localStorage.getItem("token");
+    if (tokenIsValid == "true" && token) {
       navigate("/home");
-    } else {
-      navigate("/");
     }
-  }, [tokenIsValid]);
+    // else{
+    //   localStorage.removeItem("token");
+    // }
+  }, [textError, tokenIsValid]);
 
   // Logica para registro
   const [
     isEqualPasswordAndPasswordConfirmation,
     setIsEqualPasswordAndPasswordConfirmation,
   ] = useState(false);
-  
+
   const [formDataRegister, setFormDataRegister] = useState({
     userType: "externo",
     email: "",
@@ -54,7 +57,6 @@ const Login = () => {
   const handleSubmitRegister = (e) => {
     try {
       e.preventDefault();
-      console.log(formDataRegister.password);
       // Aquí puedes manejar la lógica para enviar los datos a tu servidor o realizar otras acciones
       if (isEqualPasswordAndPasswordConfirmation == false) {
         console.log("isEqual", isEqualPasswordAndPasswordConfirmation);
@@ -81,21 +83,43 @@ const Login = () => {
     });
   };
 
-  const handleSubmitLogin = async (e) => {
+  const handleSubmitLogin = (e) => {
     e.preventDefault();
-    const response = await axios.post("/user/login", formLogin);
-    const tokenLocal = response.data.token;
-    localStorage.setItem("token", tokenLocal);
-    axios.defaults.headers.common["authorization"] = tokenLocal;
-    console.log("Token obtenido:", tokenLocal);
-    const detailUserResponse = await axios.get("/user/detail");
-    const detailUser = detailUserResponse.data;
-    setUser(detailUser);
-    console.log("User", detailUser);
-    navigate("/home");
+    // try{
+    axios
+      .post("/user/login", formLogin)
+      .then((response) => {
+        const tokenLocal = response.data.token;
+        localStorage.setItem("token", tokenLocal);
+        axios.defaults.headers.common["authorization"] = tokenLocal;
+        axios
+          .get("/user/detail")
+          .then((response) => {
+            localStorage.setItem("tokenIsValid", "true");
+            const detailUser = response.data;
+            setUser(detailUser);
+            navigate("/home");
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      })
+      .catch((error) => {
+        console.log("Error ",error.response);
+      });
+
+  
+    // }catch(error){
+    //   try{
+    //     const responseError = error.response.data
+    //     setTextError(responseError.error);
+    //   }catch(errorSub){
+    //     console.log("Error al conectar con el servidor")
+    //   }
+    // }
   };
 
-  return !user ? (
+  return tokenIsValid == "false" ? (
     <div className="index-login">
       <div className="description">
         <h1>UNTELS Connect</h1>
@@ -159,7 +183,7 @@ const Login = () => {
                     onChange={handleChangeLogin}
                   />
                 </label>
-
+                <div>{textError}</div>
                 <button type="submit">Ingresar</button>
               </form>
             </div>
@@ -252,7 +276,6 @@ const Login = () => {
                     onChange={handleChangeRegister}
                   />
                 </label>
-
                 <button type="submit">Registrarse</button>
               </form>
             </div>

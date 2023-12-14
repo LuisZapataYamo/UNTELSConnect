@@ -8,8 +8,22 @@ import JsPNG from "../../assets/png/js.png";
 import untels1PNG from "../../assets/jpg/fondo.jpg";
 import untels2PNG from "../../assets/jpg/untels2.jpg";
 import untelslogoPNG from "../../assets/png/untels_logo.png";
+import { useContext, useEffect, useState } from "react";
+import { GlobalContext } from "../../context/GlobalStateContext";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const { user, setUser, titlePage, setTitlePage } = useContext(GlobalContext);
+  const tokenIsValid = localStorage.getItem("tokenIsValid");
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (tokenIsValid == "false") {
+      navigate("/");
+    }
+    setTitlePage("Inicio");
+  }, [tokenIsValid]);
+
   const images = [
     { src: ServerPNG, width: 2, height: 4 },
     { src: PythonPNG, width: 4, height: 3 },

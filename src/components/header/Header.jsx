@@ -1,26 +1,41 @@
 import "./Header.css";
 
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../../context/GlobalStateContext";
 import FacebookIcon from "../../assets/svg/facebook.svg?react";
 import InstagramIcon from "../../assets/svg/instagram.svg?react";
 import UniversityIcon from "../../assets/svg/university.svg?react";
 import WhatsappIcon from "../../assets/svg/whatsapp.svg?react";
 import PlusIcon from "../../assets/svg/plus.svg?react";
+import UNTELSPNG from "../../assets/png/untels_escudo.png";
 import { useNavigate } from "react-router-dom";
 
 const Header = () => {
-  const { user, setUser } = useContext(GlobalContext);
+  const { user, setUser, titlePage, setTitlePage } = useContext(GlobalContext);
   const [isMenuVisible, setMenuVisible] = useState(false);
+  const [isNewPost, setIsNewPost] = useState(false);
   const navigate = useNavigate();
+  
+  useEffect(() => {
+    setMenuVisible(false);
+    if (titlePage == "Crear Post") {
+      setIsNewPost(true);
+    } else {
+      setIsNewPost(false);
+    }
+  }, [titlePage]);
 
   const toggleMenu = () => {
     setMenuVisible(!isMenuVisible);
   };
 
+  const handleClickLogo = () => {
+    navigate("/home");
+  }
+
   const handleCreatedPost = () => {
     navigate("/newPost");
-  }
+  };
 
   const handleSignOut = () => {
     localStorage.removeItem("token");
@@ -31,6 +46,7 @@ const Header = () => {
   };
 
   const handleSettings = () => {
+    // TODO: Falta realizar logica para settings
     // Lógica para ir a la página de configuración o mostrar un modal de configuración
     console.log("Go to Settings");
   };
@@ -38,27 +54,26 @@ const Header = () => {
   return (
     <div className="header-home">
       <ul className="list-icon-social">
-        <li className="icon-social">
-          <FacebookIcon />
+        <li className="icon-page" onClick={handleClickLogo}>
+          <img src={UNTELSPNG} alt="" />
+          UC
         </li>
-        <li className="icon-social">
-          <InstagramIcon />
-        </li>
-        <li className="icon-social">
-          <UniversityIcon />
-        </li>
-        <li className="icon-social">
-          <WhatsappIcon />
-        </li>
+        <li className="title-page">{titlePage}</li>
       </ul>
-      <div className="search-bar">
-        <input type="text" placeholder="UNTELSConnect" />
-      </div>
+      {!isNewPost && (
+        <div className="search-bar">
+          <input type="text" placeholder="UNTELSConnect" />
+        </div>
+      )}
+
       <div className="hi">
-        <i onClick={handleCreatedPost}>
-          <PlusIcon />
-          Post
-        </i>
+        {!isNewPost && (
+          <i onClick={handleCreatedPost}>
+            <PlusIcon />
+            Post
+          </i>
+        )}
+
         <div className="perfil-menu-container">
           <div className="perfil-menu" onClick={toggleMenu}>
             <img src={user?.avatar} alt="img-avatar" />

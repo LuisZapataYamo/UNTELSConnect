@@ -9,13 +9,13 @@ import { GlobalContext } from "../context/GlobalStateContext";
 const BlogLayout = () => {
   const { user, setUser } = useContext(GlobalContext);
   const navigate = useNavigate();
-  const tokeIsValid = localStorage.getItem("tokenIsValid");
 
   useEffect(() => {
+    const tokeIsValid = localStorage.getItem("tokenIsValid");
     if (tokeIsValid === "false") {
       navigate("/");
     }
-  }, [tokeIsValid]);
+  }, []);
 
   return (
     <div className="home-blog">

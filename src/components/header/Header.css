@@ -9,19 +9,53 @@ div.header-home {
 }
 
 div.header-home ul.list-icon-social {
-  width: 20rem;
+  flex: 1;
+  width: 25rem;
   height: 100%;
   list-style-type: none;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 2rem;
   padding: 0 2rem;
 }
-div.header-home div.search-bar {
+
+div.header-home ul.list-icon-social li {
   height: 100%;
   display: flex;
-  justify-self: center;
+  align-items: center;
+  justify-content: center;
+}
+
+div.header-home ul.list-icon-social li.icon-page {
+  cursor: pointer;
+  color: #004084;
+  text-align: center;
+  font-size: 3rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: -0.3rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  border-right: solid 1px black;
+  padding-right: 2rem;
+}
+
+div.header-home ul.list-icon-social li.icon-page img {
+  height: 90%;
+}
+
+div.header-home ul.list-icon-social li.title-page {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+div.header-home div.search-bar {
+  align-self: center;
+  height: 100%;
+  display: flex;
   align-items: center;
 }
 
@@ -42,10 +76,11 @@ div.header-home div.search-bar input::placeholder {
 }
 
 div.header-home div.hi {
+  flex: 1;
   width: 20rem;
   height: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   gap: 2rem;
 }
@@ -59,7 +94,8 @@ div.header-home div.hi i {
   font-size: 1.5rem;
 }
 
-div.header-home div.hi i:hover , div.header-home div.hi i:hover svg{
+div.header-home div.hi i:hover,
+div.header-home div.hi i:hover svg {
   text-shadow: black;
   filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
 }
