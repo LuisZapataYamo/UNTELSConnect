@@ -12,6 +12,7 @@ const Post = () => {
   const { user, setUser, setTitlePage } = useContext(GlobalContext);
   const { postID } = useParams();
   const [post, setPost] = useState(null);
+  const [isAuthor, setIsAuthor] = useState(false);
   const [commentForm, setCommnetForm] = useState({
     text: "",
   });
@@ -20,15 +21,23 @@ const Post = () => {
   const comentTextAreaRef = useRef(null);
 
   useEffect(() => {
-    const tokenLocal = localStorage.getItem("token");
-    setTitlePage("Post");
     const fetchData = async () => {
       try {
+        const tokenLocal = localStorage.getItem("token");
+        setTitlePage("Post");
+
         if (tokenLocal) {
           axios.defaults.headers.common["authorization"] = tokenLocal;
-          const response = await axios.get("/user/detail");
-          const userDetail = response.data;
-          setUser(userDetail);
+          const responseUser = await axios.get("/user/detail");
+          const userDetail = responseUser.data;
+          setUser(responseUser.data);
+
+          const responsePost = await axios.get(`/post/${postID}/`);
+          setPost(responsePost.data);
+
+          if (responsePost.data.user.id === responseUser.data.id) {
+            setIsAuthor(true);
+          }
         } else {
           navigate("/");
         }
@@ -37,26 +46,11 @@ const Post = () => {
         console.log(error);
         navigate("/");
       }
-
-      const optainPost = async () => {
-        axios.defaults.headers.common["authorization"] = tokenLocal;
-        await axios
-          .get(`/post/${postID}/`)
-          .then((response) => {
-            setPost(response.data);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      };
-
-      optainPost();
     };
 
     fetchData();
-  }, []);
+  }, [postID]);
 
-  useEffect(() => {}, [post]);
 
   const handleContentPostChange = (e) => {
     const { name, value } = e.target;
@@ -68,6 +62,10 @@ const Post = () => {
     setCommnetForm({
       [name]: value,
     });
+  };
+
+  const handleEditPost = () => {
+    navigate(`/post/${post.id}/edit`);
   };
 
   const handleSumbitComment = async (e) => {
@@ -104,6 +102,18 @@ const Post = () => {
             </span>
             <span className="date">Publicado: {post?.createdAt}</span>
           </div>
+          {isAuthor ? (
+            <div className="edit" onClick={handleEditPost}>
+              Edit
+            </div>
+          ) : null}
+        </div>
+        <div className="tags">
+          {post?.tags.map((tag, index) => (
+            <div key={index} className="tag">
+                #{tag}
+            </div>
+          ))}
         </div>
         <h1 className="title">{post?.title}</h1>
         {useMemo(

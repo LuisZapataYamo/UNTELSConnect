@@ -117,7 +117,7 @@ const Login = () => {
           });
       })
       .catch((error) => {
-        console.log("Error ", error.response);
+        console.log("Error ", error);
       });
 
     // }catch(error){

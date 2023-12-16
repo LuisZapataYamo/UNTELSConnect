@@ -112,3 +112,15 @@ div.index-newpost div.content-post form div.text-post textarea::placeholder{
 div.index-newpost div.content-post form div.text-post textarea:focus-visible{
     outline: none;
 }
+
+div.index-newpost div.content-post form button {
+  width: 15rem;
+  height: 5rem;
+  background-color: #004084;
+  color: #f5b335;
+  font-size: 2rem;
+  font-weight: 700;
+  border: 0;
+  border-radius: 0.5rem;
+  padding: 1rem;
+}

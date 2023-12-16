@@ -1,3 +1,4 @@
+import axios from "axios"
 import "./Home.css";
 
 import ServerPNG from "../../assets/png/server.png";
@@ -18,10 +19,27 @@ const Home = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (tokenIsValid == "false") {
-      navigate("/");
-    }
     setTitlePage("Inicio");
+    const fetchData = async () => {
+      try {
+        const tokenLocal = localStorage.getItem("token");
+        if (tokenLocal) {
+          axios.defaults.headers.common["authorization"] = tokenLocal;
+          const response = await axios.get("/user/detail");
+          const userDetail = response.data;
+          setUser(userDetail);
+
+        } else {
+          navigate("/");
+        }
+      } catch (error) {
+        localStorage.removeItem("token");
+        console.log(error);
+        navigate("/");
+      }
+    };
+
+    fetchData();
   }, [tokenIsValid]);
 
   const images = [

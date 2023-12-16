@@ -11,6 +11,7 @@ import { GlobalContext } from "../context/GlobalStateContext.jsx";
 import CreatedPost from "../pages/CreatePost/CreatedPost.jsx";
 import Post from "../pages/Post/Post.jsx";
 import DiscoverPost from "../pages/DiscoverPost/DiscoverPost.jsx";
+import EditPost from "../pages/EditPost/EditPost.jsx";
 
 const Routing = () => {
   const { user, setUser } = useContext(GlobalContext);
@@ -25,6 +26,7 @@ const Routing = () => {
           <Route path="/discover/:q" element={<DiscoverPost />} />
           <Route path="/newPost" element={<CreatedPost />} />
           <Route path="/post/:postID" element={<Post />} />
+          <Route path="/post/:postID/edit" element={<EditPost />} />
           <Route path="/*" element={<NotFound />} />
         </Route>
       </Routes>

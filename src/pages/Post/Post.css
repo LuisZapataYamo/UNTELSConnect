@@ -21,16 +21,32 @@ div.index-post div.container-post {
 }
 
 div.index-post div.container-post div.post-info {
+  height: 6rem;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  align-items: center;
   gap: 1rem;
 }
 
 div.index-post div.container-post div.post-info div.info-text {
+  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+div.index-post div.container-post div.post-info div.edit {
+  height: 4rem;
+  width: 7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+  background-color: #f5b335;
+  font-weight: 800;
+  color: black;
+  cursor: pointer;
 }
 
 div.index-post div.container-post div.post-info div.info-text span.username {
@@ -40,6 +56,25 @@ div.index-post div.container-post div.post-info div.info-text span.username {
 
 div.index-post div.container-post div.post-info div.info-text span.date {
   font-size: 1.2rem;
+}
+
+div.index-post div.container-post div.tags {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1rem;
+  flex-wrap: wrap;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 1rem;
+}
+
+div.index-post div.container-post div.tags div.tag {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  border: solid 1px black;
 }
 
 div.index-post div.container-post > h1 {
@@ -97,8 +132,8 @@ div.index-post div.container-comments form {
   gap: 2rem;
 }
 
-div.index-post div.container-comments form h2{
-    width: 100%;
+div.index-post div.container-comments form h2 {
+  width: 100%;
 }
 
 div.index-post div.container-comments form div.content {
@@ -148,34 +183,33 @@ div.index-post div.container-comments form button {
   padding: 1rem;
 }
 
-
-div.index-post div.container-comments div.comments{
-    display: flex;
-    flex-direction: column;
+div.index-post div.container-comments div.comments {
+  display: flex;
+  flex-direction: column;
 }
 
-div.index-post div.container-comments div.comments div.comment{
-    width: 100%;
-    height: 10rem;
-    display: flex;
-    align-items: flex-start;
-    gap: 2rem;
+div.index-post div.container-comments div.comments div.comment {
+  width: 100%;
+  height: 10rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
 }
 
-div.index-post div.container-comments div.comments div.info-user{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    gap: 1rem;
+div.index-post div.container-comments div.comments div.info-user {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 1rem;
 }
 
-div.index-post div.container-comments div.comments div.info-user div.name{
-    font-size: 1.6rem;
-    font-weight: 600;
+div.index-post div.container-comments div.comments div.info-user div.name {
+  font-size: 1.6rem;
+  font-weight: 600;
 }
 
-div.index-post div.container-comments div.comments div.comment{
-    width: 100%;
+div.index-post div.container-comments div.comments div.comment {
+  width: 100%;
 }
