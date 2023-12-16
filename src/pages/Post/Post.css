@@ -29,6 +29,15 @@ div.index-post div.container-post div.post-info {
   gap: 1rem;
 }
 
+div.index-post div.container-post div.post-info div.user-img{
+  height: 100%;
+}
+
+div.index-post div.container-post div.post-info div.user-img img{
+  height: 100%;
+}
+
+
 div.index-post div.container-post div.post-info div.info-text {
   flex: 1;
   display: flex;
