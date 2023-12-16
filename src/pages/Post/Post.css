@@ -196,6 +196,10 @@ div.index-post div.container-comments div.comments div.comment {
   gap: 2rem;
 }
 
+div.index-post div.container-comments div.comments div.comment img{
+  height: 6.4rem;
+}
+
 div.index-post div.container-comments div.comments div.info-user {
   width: 100%;
   display: flex;
