@@ -29,8 +29,8 @@ const Post = () => {
           const response = await axios.get("/user/detail");
           const userDetail = response.data;
           setUser(userDetail);
-        }else{
-          navigate("/")
+        } else {
+          navigate("/");
         }
       } catch (error) {
         localStorage.removeItem("token");
@@ -51,15 +51,12 @@ const Post = () => {
       };
 
       optainPost();
-      
     };
 
     fetchData();
   }, []);
 
-  useEffect(() => {
-
-  }, [post])
+  useEffect(() => {}, [post]);
 
   const handleContentPostChange = (e) => {
     const { name, value } = e.target;
@@ -76,24 +73,22 @@ const Post = () => {
   const handleSumbitComment = async (e) => {
     e.preventDefault();
     console.log();
+    await axios.post(`/post/${postID}/comments`, commentForm).catch((error) => {
+      console.log(error);
+    });
+
     await axios
-      .post(`/post/${postID}/comments`, commentForm)
+      .get(`/post/${postID}/comments/all`)
+      .then((response) => {
+        console.log(response.data);
+        setPost({
+          ...post,
+          comments: response.data.comments,
+        });
+      })
       .catch((error) => {
         console.log(error);
       });
-    
-      await axios
-        .get(`/post/${postID}/comments/all`)
-        .then((response) => {
-          console.log(response.data);
-          setPost({
-            ...post,
-            comments: response.data.comments,
-          });
-        })
-        .catch((error) => {
-          console.log(error);
-        });
   };
 
   return (
