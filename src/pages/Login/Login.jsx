@@ -47,7 +47,9 @@ const Login = () => {
   ] = useState(false);
 
   const [formDataRegister, setFormDataRegister] = useState({
-    userType: "externo",
+    typeUser: "extern",
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -70,9 +72,19 @@ const Login = () => {
     try {
       e.preventDefault();
       // Aquí puedes manejar la lógica para enviar los datos a tu servidor o realizar otras acciones
-      if (isEqualPasswordAndPasswordConfirmation == false) {
-        console.log("isEqual", isEqualPasswordAndPasswordConfirmation);
-      }
+      console.log("Submit", isEqualPasswordAndPasswordConfirmation);
+      axios
+        .post("/user/", formDataRegister)
+        .then((response) => {
+          console.log(response.data);
+          navigate("/");
+        })
+        .catch((error) => {
+          console.log("Error al registrar usuario", error);
+          if (error.response.status == 401) {
+            navigate("/");
+          }
+        });
       console.log("Datos del formulario:", formDataRegister);
     } catch (error) {
       console.error("Error en createUser:", error);
@@ -119,15 +131,6 @@ const Login = () => {
       .catch((error) => {
         console.log("Error ", error);
       });
-
-    // }catch(error){
-    //   try{
-    //     const responseError = error.response.data
-    //     setTextError(responseError.error);
-    //   }catch(errorSub){
-    //     console.log("Error al conectar con el servidor")
-    //   }
-    // }
   };
 
   return !tokenIsValid ? (
@@ -210,8 +213,8 @@ const Login = () => {
                       <input
                         type="radio"
                         name="userType"
-                        value="externo"
-                        checked={formDataRegister.userType === "externo"}
+                        value="extern"
+                        checked={formDataRegister.typeUser === "extern"}
                         onChange={handleChangeRegister}
                       />
                       Externo
@@ -220,8 +223,8 @@ const Login = () => {
                       <input
                         type="radio"
                         name="userType"
-                        value="estudiante"
-                        checked={formDataRegister.userType === "estudiante"}
+                        value="student"
+                        checked={formDataRegister.typeUser === "estudiante"}
                         onChange={handleChangeRegister}
                       />
                       Estudiante
@@ -258,6 +261,24 @@ const Login = () => {
                     </label>
                   </>
                 )}
+                <label>
+                  Nombre:
+                  <input
+                    type="text"
+                    name="firstName"
+                    value={formDataRegister.firstName}
+                    onChange={handleChangeRegister}
+                  />
+                </label>
+                <label>
+                  Apellido:
+                  <input
+                    type="text"
+                    name="lastName"
+                    value={formDataRegister.lastName}
+                    onChange={handleChangeRegister}
+                  />
+                </label>
                 <label>
                   Correo:
                   <input
